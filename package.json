@@ -1,0 +1,19 @@
+{
+  "name": "react-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grzegorzj/react-ts.git"
+  },
+  "author": "Grzegorz Janik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grzegorzj/react-ts/issues"
+  },
+  "homepage": "https://github.com/grzegorzj/react-ts#readme"
+}
