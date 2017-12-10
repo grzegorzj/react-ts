@@ -1,7 +1,7 @@
 import * as React from 'react';
-import './artist.scss';
+import './Track.scss';
 
-class Artist extends React.Component {
+class Track extends React.Component {
     render () {
         return (
             <b>This is the list of artists</b>
@@ -9,4 +9,4 @@ class Artist extends React.Component {
     }
 }
 
-export default Artist;
+export default Track;
