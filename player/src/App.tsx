@@ -1,10 +1,11 @@
 import * as React from 'react';
 import './App.scss';
+import * as ArtistCatalogue from './ArtistCatalogue';
 
-class App extends React.Component {
+class App extends React.ComponentClass {
   render() {
     return (
-      <b>Hello</b>
+      <ArtistCatalogue />
     );
   }
 }
