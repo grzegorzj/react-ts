@@ -1,12 +1,10 @@
 import * as React from 'react';
 import './index.scss';
 
-class Playlist extends React.Component {
+export class Playlist extends React.Component<{}, object> {
     render () {
         return (
-            <b>This is the list of artists</b>
+            <b>This is the list of songs in a playlist</b>
         );
     }
 }
-
-export default Playlist;

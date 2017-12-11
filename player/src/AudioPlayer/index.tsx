@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './index.scss';
 
-class AudioPlayer extends React.Component {
+export class AudioPlayer extends React.Component<{}, object> {
     render () {
         return (
             <b>This is the list of artists</b>
@@ -9,4 +9,3 @@ class AudioPlayer extends React.Component {
     }
 }
 
-export default AudioPlayer;
