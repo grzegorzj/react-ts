@@ -1,13 +1,12 @@
 import * as React from 'react';
 import './index.scss';
-import { Link } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 import * as queryString from 'querystring';
 import { Artist } from './Artist';
 import { Track } from '../Playlist/Track';
 import * as _ from 'lodash';
 
-const ENDPOINT_URL: string = 'http://api-v2.hearthis.at/feed/';
+const ENDPOINT_URL: string = 'https://api-v2.hearthis.at/feed/';
 const TOP_ARTISTS_COUNT: number = 5;
 
 interface FeedParams {
@@ -19,9 +18,7 @@ interface ArtistCatalogueState {
     artists: Artist[];
 }
 
-export class ArtistCatalogue extends React.Component<{} | RouteComponentProps<{}>, object> {
-    public state: ArtistCatalogueState;
-
+export class ArtistCatalogue extends React.Component<{} | RouteComponentProps<{}>, ArtistCatalogueState> {
     constructor (props: {}) {
         super(props);
 
@@ -40,7 +37,8 @@ export class ArtistCatalogue extends React.Component<{} | RouteComponentProps<{}
             .then((response: any) => response.json())
             .then((data: any) => {
                 const artists: Artist[] = data.map((track: Track) => track.user);
-                const topArtists: Artist[] = _.uniqBy(artists, (artist: Artist) => artist.id).slice(0, TOP_ARTISTS_COUNT - 1);
+                const topArtists: Artist[] = _.uniqBy(artists, (artist: Artist) => artist.id)
+                    .slice(0, TOP_ARTISTS_COUNT);
 
                 this.setState({
                     artists: topArtists
@@ -50,20 +48,19 @@ export class ArtistCatalogue extends React.Component<{} | RouteComponentProps<{}
 
     public render (): JSX.Element {
         return (
-            <div>
-                <b>This is the list of artists</b>
-                <Link to="/playlist">Link to playlist</Link>
-                { this.artistsList }
+            <div className="artist-catalogue">
+                <h1 className="artist-catalogue__header">Top artists</h1>
+                {this.artistsList}
             </div>
         );
     }
 
     private get artistsList (): JSX.Element {
         return (
-                <ul>
+                <ul className="artist-catalogue__artist-list">
                 {
                     this.state.artists.map((artist: Artist) => (
-                        <li>
+                        <li className="artist-catalogue__artist-list">
                             <Artist artist={artist} />
                         </li>
                     ))

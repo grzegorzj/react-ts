@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './Track.scss';
-import {Artist} from '../ArtistCatalogue/Artist';
+import { Artist } from '../ArtistCatalogue/Artist';
 
 export interface Track {
     user: Artist;

@@ -9,7 +9,7 @@ class App extends React.Component {
         return (
             <Switch>
                 <Route exact={true} path="/" component={ArtistCatalogue} />
-                <Route path="/" component={Playlist} />
+                <Route path="/playlist/:permalink" component={Playlist} />
             </Switch>
         );
     }
