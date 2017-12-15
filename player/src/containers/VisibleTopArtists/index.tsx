@@ -5,9 +5,9 @@ import { PlayerState } from '../../reducers';
 
 // `connect` method + types, ugh
 
-function mapStateToProps (state: PlayerState): any {
+function mapStateToProps (state: any): any {
     return {
-        artists: state.artists
+        artists: state.defaultReducer.artists
     }
 }
 
@@ -20,6 +20,6 @@ function mapDispatchToProps (dispatch: Dispatch<PlayerState>): any {
 }
 
 export default connect(
-    mapDispatchToProps,
     mapStateToProps,
+    mapDispatchToProps,
 )(ArtistCatalogue);

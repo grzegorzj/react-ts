@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.scss';
 import { Provider } from 'react-redux';
 import {applyMiddleware, createStore, Store} from 'redux';
-import { playerApp, PlayerState } from './reducers';
+import { playerApp, PlayerState} from './reducers';
 import { default as thunkMiddleware } from 'redux-thunk';
 
 const store: Store<PlayerState | {}> = createStore(playerApp, {}, applyMiddleware(thunkMiddleware));
