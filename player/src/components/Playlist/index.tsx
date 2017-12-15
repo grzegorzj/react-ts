@@ -1,47 +1,38 @@
 import * as React from 'react';
 import './index.scss';
-import { RouteComponentProps } from 'react-router';
-// import { Artist } from '../ArtistCatalogue/Artist';
-import { Track } from './Track';
+import {Artist} from "../ArtistCatalogue/Artist";
+// import { Track } from './Track';
 
-const ENDPOINT_URL: string = 'https://api-v2.hearthis.at/shawne/?type=likes&page=1&count=5';
-
-interface PlaylistState {
-    tracks: Track[];
-}
+// const ENDPOINT_URL: string = 'https://api-v2.hearthis.at/shawne/?type=likes&page=1&count=5';
 
 interface PlaylistProps {
-    permalink: string;
+    dispatchFetchArtist(): void;
+    artist: Artist;
 }
 
-export class Playlist extends React.Component<RouteComponentProps<PlaylistProps>, PlaylistState> {
-    public state: PlaylistState;
-
-    constructor (props: RouteComponentProps<PlaylistProps>) {
+export class Playlist extends React.Component<PlaylistProps> {
+    constructor (props: PlaylistProps) {
         super(props);
-
-        this.state = {
-            tracks: [],
-        };
     }
 
     public componentDidMount (): void {
-        fetch(`${ENDPOINT_URL}${this.props.match.params.permalink}/`)
-            .then((response: any) => response.json())
-            .then((data: any) => {
-                console.log(data);
+        // fetch(`${ENDPOINT_URL}${this.props.match.params.permalink}/`)
+        //     .then((response: any) => response.json())
+        //     .then((data: any) => {
+        //         console.log(data);
+        //
+        //         // this.setState({
+        //         //     tracks: data
+        //         // });
+        //     });
 
-                // this.setState({
-                //     tracks: data
-                // });
-            });
+        this.props.dispatchFetchArtist();
     }
 
     public render (): JSX.Element {
         return (
             <div className="playlist">
-                <h1 className="playlist__header">Top artists</h1>
-                {this.artistsList}
+                <h1 className="playlist__header">{this.props.artist ? this.props.artist.username : ''}</h1>
             </div>
         );
     }

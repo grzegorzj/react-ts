@@ -23,9 +23,16 @@ function Artists (state: PlayerState = initialState, action: AnyAction): PlayerS
         case FETCHED_ARTIST_DETAILS:
             const artistIndex: number = state.artists
                 .findIndex((artist: Artist) => artist.permalink === action.artistDetails.permalink);
+
             const stateCopy: PlayerState = Object.assign({}, state);
             const artistsCopy: Artist[] = stateCopy.artists.splice(0);
-            artistsCopy[artistIndex] = action.artistDetails;
+
+            if (artistIndex > -1) {
+                artistsCopy[artistIndex] = action.artistDetails;
+            } else {
+                artistsCopy.push(action.artistDetails);
+            }
+
             stateCopy.artists = artistsCopy;
             return stateCopy;
         default:
