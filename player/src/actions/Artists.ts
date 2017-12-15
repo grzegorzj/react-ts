@@ -2,8 +2,8 @@ import {ThunkAction} from 'redux-thunk';
 import { PlayerState } from '../reducers';
 import { Dispatch } from 'react-redux';
 import * as queryString from "querystring";
-import {Artist, ExtendedArtist} from '../components/ArtistCatalogue/Artist';
-import {Track} from '../components/Playlist/Track';
+import { Artist } from '../components/ArtistCatalogue/Artist';
+import { Track } from '../components/Playlist/Track';
 import * as _ from 'lodash';
 
 export const FETCHED_TOP_ARTISTS = 'FETCHED_TOP_ARTISTS';
@@ -15,7 +15,7 @@ function fetchedTopArtists (topArtists: Artist[]): any {
 }
 
 export const FETCHED_ARTIST_DETAILS = 'FETCHED_ARTIST_DETAILS';
-function fetchedArtistDetails (artistDetails: ExtendedArtist): any {
+function fetchedArtistDetails (artistDetails: Artist): any {
     return {
         type: FETCHED_ARTIST_DETAILS,
         artistDetails
@@ -23,13 +23,13 @@ function fetchedArtistDetails (artistDetails: ExtendedArtist): any {
 }
 
 
-export function fetchArtistDetails (permalink: string): ThunkAction<Promise<ExtendedArtist>, PlayerState, null> {
+export function fetchArtistDetails (permalink: string): ThunkAction<Promise<Artist>, PlayerState, null> {
     const ENDPOINT_URL: string = 'https://api-v2.hearthis.at/';
 
-    return (dispatch: Dispatch<PlayerState>, getState: () => PlayerState): Promise<ExtendedArtist> => {
+    return (dispatch: Dispatch<PlayerState>, getState: () => PlayerState): Promise<Artist> => {
         return fetch(`${ENDPOINT_URL}${permalink}/`)
             .then((response: any) => response.json())
-            .then((artistDetails: ExtendedArtist) => {
+            .then((artistDetails: Artist) => {
                 dispatch(fetchedArtistDetails(artistDetails));
                 return artistDetails;
             });

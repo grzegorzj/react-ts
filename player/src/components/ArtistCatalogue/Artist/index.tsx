@@ -8,30 +8,17 @@ export interface Artist {
     uri: string;
     avatar_url: string;
     permalink: string;
-}
-
-export interface ExtendedArtist extends Artist {
-    track_count: string;
-    thumb_url: string;
+    track_count?: string; // yep.
+    thumb_url?: string;
 }
 
 interface ArtistProps {
     artist: Artist;
 }
 
-interface ArtistState {
-    extendedArtist: ExtendedArtist | null;
-}
-
-export class Artist extends React.Component<ArtistProps, ArtistState> {
-    public state: ArtistState;
-
+export class Artist extends React.Component<ArtistProps> {
     constructor (props: ArtistProps) {
         super(props);
-
-        this.state = {
-            extendedArtist: null,
-        }
     }
 
 
@@ -39,16 +26,16 @@ export class Artist extends React.Component<ArtistProps, ArtistState> {
         return (
             <div className="artist">
                 {
-                    this.state.extendedArtist ?
-                        <img className="artist__avatar" src={this.state.extendedArtist.thumb_url} /> :
+                    this.props.artist.thumb_url ?
+                        <img className="artist__avatar" src={this.props.artist.thumb_url} /> :
                         null
                 }
                 <Link to={`/playlist/${this.props.artist.permalink}`}>
                     <b>{this.props.artist.username}</b>
                 </Link>
                 {
-                    this.state.extendedArtist ?
-                        <span className="artist__track-count">{this.state.extendedArtist.track_count} tracks</span> :
+                    this.props.artist.track_count ?
+                        <span className="artist__track-count">{this.props.artist.track_count} tracks</span> :
                         null
                 }
             </div>
