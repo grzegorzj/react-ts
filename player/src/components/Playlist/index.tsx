@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router';
 // import { Artist } from '../ArtistCatalogue/Artist';
 import { Track } from './Track';
 
-const ENDPOINT_URL: string = 'https://api-v2.hearthis.at/';
+const ENDPOINT_URL: string = 'https://api-v2.hearthis.at/shawne/?type=likes&page=1&count=5';
 
 interface PlaylistState {
     tracks: Track[];

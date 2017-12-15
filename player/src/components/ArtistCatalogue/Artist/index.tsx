@@ -2,8 +2,6 @@ import * as React from 'react';
 import './index.scss';
 import { Link } from 'react-router-dom';
 
-const ENDPOINT_URL: string = 'https://api-v2.hearthis.at/';
-
 export interface Artist {
     username: string;
     id: string;
@@ -12,7 +10,7 @@ export interface Artist {
     permalink: string;
 }
 
-interface ExtendedArtist extends Artist {
+export interface ExtendedArtist extends Artist {
     track_count: string;
     thumb_url: string;
 }

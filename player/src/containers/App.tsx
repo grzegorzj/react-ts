@@ -1,8 +1,8 @@
 import * as React from 'react';
 import './App.scss';
-import { ArtistCatalogue } from './ArtistCatalogue';
+import { ArtistCatalogue } from '../components/ArtistCatalogue';
 import { Switch, Route } from 'react-router-dom';
-import { Playlist } from './Playlist';
+import { Playlist } from '../components/Playlist';
 
 class App extends React.Component {
     render() {
