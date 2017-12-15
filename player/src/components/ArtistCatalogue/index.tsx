@@ -1,22 +1,19 @@
 import * as React from 'react';
 import './index.scss';
-import { RouteComponentProps } from 'react-router';
 import { Artist } from './Artist';
 
-interface ArtistCatalogueState {
+export interface ArtistCatalogueProps {
     artists: Artist[];
+    dispatchFetchArtists(): void;
 }
 
-export class ArtistCatalogue extends React.Component<{} | RouteComponentProps<{}>, ArtistCatalogueState> {
-    constructor (props: {}) {
+export class ArtistCatalogue extends React.Component<ArtistCatalogueProps> {
+    constructor (props: ArtistCatalogueProps) {
         super(props);
-
-        this.state = {
-            artists: [],
-        };
     }
 
     public componentDidMount (): void {
+        this.props.dispatchFetchArtists();
     }
 
     public render (): JSX.Element {
@@ -32,7 +29,7 @@ export class ArtistCatalogue extends React.Component<{} | RouteComponentProps<{}
         return (
                 <ul className="artist-catalogue__artist-list">
                 {
-                    this.state.artists.map((artist: Artist) => (
+                    this.props.artists.map((artist: Artist): JSX.Element => (
                         <li className="artist-catalogue__artist-list">
                             <Artist artist={artist} />
                         </li>

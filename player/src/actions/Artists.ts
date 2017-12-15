@@ -27,7 +27,7 @@ export function fetchArtistDetails (permalink: string): ThunkAction<Promise<Exte
     const ENDPOINT_URL: string = 'https://api-v2.hearthis.at/';
 
     return (dispatch: Dispatch<PlayerState>, getState: () => PlayerState): Promise<ExtendedArtist> => {
-        return fetch(`${ENDPOINT_URL}${this.props.artist.permalink}/`)
+        return fetch(`${ENDPOINT_URL}${permalink}/`)
             .then((response: any) => response.json())
             .then((artistDetails: ExtendedArtist) => {
                 dispatch(fetchedArtistDetails(artistDetails));

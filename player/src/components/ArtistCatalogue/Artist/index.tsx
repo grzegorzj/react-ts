@@ -34,15 +34,6 @@ export class Artist extends React.Component<ArtistProps, ArtistState> {
         }
     }
 
-    public componentDidMount (): void {
-        fetch(`${ENDPOINT_URL}${this.props.artist.permalink}/`)
-            .then((response: any) => response.json())
-            .then((data: ExtendedArtist) => {
-                this.setState({
-                    extendedArtist: data
-                });
-            });
-    }
 
     render (): JSX.Element {
         return (
