@@ -1,12 +1,17 @@
 import * as React from 'react';
 import './index.scss';
 import {Artist} from "../ArtistCatalogue/Artist";
-// import { Track } from './Track';
+import { Track } from './Track';
 
-// const ENDPOINT_URL: string = 'https://api-v2.hearthis.at/shawne/?type=likes&page=1&count=5';
+export interface VisiblePlaylist {
+    artistPermalink: string;
+    tracksMaxCount: number;
+    tracklist: Track[];
+}
 
 interface PlaylistProps {
-    dispatchFetchArtist(): void;
+    dispatchFetchArtist(): Promise<Artist>;
+    dispatchFetchTracklist(): Promise<Track[]>;
     artist: Artist;
 }
 
@@ -16,17 +21,9 @@ export class Playlist extends React.Component<PlaylistProps> {
     }
 
     public componentDidMount (): void {
-        // fetch(`${ENDPOINT_URL}${this.props.match.params.permalink}/`)
-        //     .then((response: any) => response.json())
-        //     .then((data: any) => {
-        //         console.log(data);
-        //
-        //         // this.setState({
-        //         //     tracks: data
-        //         // });
-        //     });
-
-        this.props.dispatchFetchArtist();
+        this.props.dispatchFetchArtist().then(() => {
+            this.props.dispatchFetchTracklist();
+        });
     }
 
     public render (): JSX.Element {

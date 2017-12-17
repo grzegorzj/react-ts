@@ -2,7 +2,9 @@ import {connect, Dispatch} from 'react-redux';
 import { fetchArtistDetails } from '../../actions/Artists';
 import { PlayerState } from '../../reducers';
 import {Artist} from '../../components/ArtistCatalogue/Artist';
-import {Playlist} from '../../components/Playlist';
+import { Playlist } from '../../components/Playlist';
+import { fetchArtistTracklist } from '../../actions/Playlist';
+import { Track } from "../../components/Playlist/Track";
 
 // `connect` method + types, ugh again
 
@@ -15,10 +17,13 @@ function mapStateToProps (state: any, ownProps: any): any {
     }
 }
 
-function mapDispatchToProps (dispatch: Dispatch<PlayerState>): any {
+function mapDispatchToProps (dispatch: Dispatch<PlayerState>, ownProps: any): any {
     return {
-        dispatchFetchArtist: (permalink: string): void => {
-            dispatch(fetchArtistDetails(permalink));
+        dispatchFetchArtist: (): Promise<Artist> => {
+            return dispatch(fetchArtistDetails(ownProps.match.params.permalink));
+        },
+        dispatchFetchTracklist: (): Promise<Track[] | undefined> => {
+            return dispatch(fetchArtistTracklist(ownProps.match.params.permalink));
         }
     }
 }

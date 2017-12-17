@@ -1,12 +1,12 @@
-import {ThunkAction} from 'redux-thunk';
+import { ThunkAction } from 'redux-thunk';
 import { PlayerState } from '../reducers';
 import { Dispatch } from 'react-redux';
-import * as queryString from "querystring";
+import * as queryString from 'querystring';
 import { Artist } from '../components/ArtistCatalogue/Artist';
 import { Track } from '../components/Playlist/Track';
 import * as _ from 'lodash';
 
-export const FETCHED_TOP_ARTISTS = 'FETCHED_TOP_ARTISTS';
+export const FETCHED_TOP_ARTISTS: string = 'FETCHED_TOP_ARTISTS';
 function fetchedTopArtists (topArtists: Artist[]): any {
     return {
         type: FETCHED_TOP_ARTISTS,
@@ -14,7 +14,7 @@ function fetchedTopArtists (topArtists: Artist[]): any {
     }
 }
 
-export const FETCHED_ARTIST_DETAILS = 'FETCHED_ARTIST_DETAILS';
+export const FETCHED_ARTIST_DETAILS: string = 'FETCHED_ARTIST_DETAILS';
 function fetchedArtistDetails (artistDetails: Artist): any {
     return {
         type: FETCHED_ARTIST_DETAILS,
