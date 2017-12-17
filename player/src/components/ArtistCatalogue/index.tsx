@@ -29,8 +29,8 @@ export class ArtistCatalogue extends React.Component<ArtistCatalogueProps> {
         return (
                 <ul className="artist-catalogue__artist-list">
                 {
-                    this.props.artists.map((artist: Artist): JSX.Element => (
-                        <li className="artist-catalogue__artist-list">
+                    this.props.artists.map((artist: Artist, i: number): JSX.Element => (
+                        <li key={i} className="artist-catalogue__artist-list">
                             <Artist artist={artist} />
                         </li>
                     ))

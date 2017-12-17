@@ -7,7 +7,7 @@ import { PlayerState } from '../../reducers';
 
 function mapStateToProps (state: any): any {
     return {
-        artists: state.Artists.artists
+        artists: state.Artists
     }
 }
 

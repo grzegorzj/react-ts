@@ -23,10 +23,17 @@ function fetchedArtistDetails (artistDetails: Artist): any {
 }
 
 
-export function fetchArtistDetails (permalink: string): ThunkAction<Promise<Artist>, PlayerState, null> {
+export function fetchArtistDetails (permalink: string): ThunkAction<Promise<Artist | undefined>, PlayerState, null> {
     const ENDPOINT_URL: string = 'https://api-v2.hearthis.at/';
 
-    return (dispatch: Dispatch<PlayerState>, getState: () => PlayerState): Promise<Artist> => {
+    return (dispatch: Dispatch<PlayerState>, getState: () => PlayerState): Promise<Artist | undefined> => {
+        const artistFetched: boolean = !!getState().Artists.find((artist: Artist) => artist.permalink === permalink &&
+        !!artist.track_count);
+
+        if (artistFetched) {
+            return <Promise<undefined>>Promise.resolve(undefined);
+        }
+
         return fetch(`${ENDPOINT_URL}${permalink}/`)
             .then((response: any) => response.json())
             .then((artistDetails: Artist) => {
@@ -46,6 +53,10 @@ export function fetchTopArtists (fetchDetails: boolean = false): ThunkAction<Pro
     const TOP_ARTISTS_COUNT: number = 5;
 
     return (dispatch: Dispatch<PlayerState>, getState: () => PlayerState): Promise<Artist[]> => {
+        if (getState().Artists && getState().Artists.length === TOP_ARTISTS_COUNT) {
+            return Promise.resolve([]);
+        }
+
         const params: FetchTopArtistsFeedParams = {
             type: 'popular',
             count: 20, // 5 is almost never enough to actually get 5 artists, this is a magic hax
@@ -57,7 +68,6 @@ export function fetchTopArtists (fetchDetails: boolean = false): ThunkAction<Pro
                 const artists: Artist[] = data.map((track: Track) => track.user);
                 const topArtists: Artist[] = _.uniqBy(artists, (artist: Artist) => artist.id)
                     .slice(0, TOP_ARTISTS_COUNT);
-
                 dispatch(fetchedTopArtists(topArtists));
 
                 return topArtists;

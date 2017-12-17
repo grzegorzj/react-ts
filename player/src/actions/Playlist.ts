@@ -19,7 +19,6 @@ function fetchedTracklist (tracklist: Track[], artistPermalink: string, tracksMa
 
 
 // always get next 20
-
 /*
 Not sure if I missed something, but it seems like foreign key between artists and playlists is the `permalink`.
  */
@@ -30,11 +29,11 @@ export function fetchArtistTracklist (artistPermalink: string): ThunkAction<Prom
         count: number;
     }
 
-    const ENDPOINT_URL: string = 'https://api-v2.hearthis.at/';
+    const ENDPOINT_URL: string = 'https://api-v2.hearthis.at';
     const PAGE_SIZE: number = 20;
 
     return (dispatch: Dispatch<PlayerState>, getState: () => PlayerState): Promise<Track[] | undefined> => {
-        const playlistInState: VisiblePlaylist | undefined = getState().playlists.find((playlist: VisiblePlaylist): boolean => {
+        const playlistInState: VisiblePlaylist | undefined = getState().Playlists.find((playlist: VisiblePlaylist): boolean => {
            return playlist.artistPermalink === artistPermalink;
         });
 
@@ -47,7 +46,7 @@ export function fetchArtistTracklist (artistPermalink: string): ThunkAction<Prom
         };
 
         const artist: Artist | undefined = getState()
-            .artists
+            .Artists
             .find((artist: Artist) => artist.permalink === artistPermalink);
 
         let tracksMaxCount: number;
@@ -59,7 +58,7 @@ export function fetchArtistTracklist (artistPermalink: string): ThunkAction<Prom
             return Promise.resolve(undefined);
         }
 
-        return fetch(`${ENDPOINT_URL}/${artistPermalink}?${queryString.stringify(params)}`)
+        return fetch(`${ENDPOINT_URL}/${artistPermalink}/?${queryString.stringify(params)}`)
             .then((response: any) => response.json())
             .then((tracks: Track[]) => {
                 dispatch(fetchedTracklist(tracks, artistPermalink, tracksMaxCount));

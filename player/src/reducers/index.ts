@@ -1,54 +1,44 @@
 import { AnyAction, combineReducers} from 'redux';
 import { Artist } from '../components/ArtistCatalogue/Artist';
-import { VisiblePlaylist } from '../components/Playlist';
+import { VisiblePlaylist} from '../components/Playlist';
 import { FETCHED_ARTIST_DETAILS, FETCHED_TOP_ARTISTS } from '../actions/Artists';
 import { FETCHED_TRACKLIST } from '../actions/Playlist';
 
 export interface PlayerState {
-    artists: Artist[];
-    playlists: VisiblePlaylist[];
-}
-
-export const initialState: PlayerState = {
-    artists: [],
-    playlists: [],
+    Artists: Artist[];
+    Playlists: VisiblePlaylist[];
 }
 
 
-function Artists (state: PlayerState = initialState, action: AnyAction): PlayerState {
+function Artists (state: Artist[] = [], action: AnyAction): Artist[] {
     switch (action.type) {
         case FETCHED_TOP_ARTISTS:
-            return Object.assign({}, state, {
-                artists: action.topArtists
-            });
+            return action.topArtists.slice();
         case FETCHED_ARTIST_DETAILS:
-            const artistIndex: number = state.artists
+            const artistIndex: number = state
                 .findIndex((artist: Artist) => artist.permalink === action.artistDetails.permalink);
 
-            const stateCopy: PlayerState = Object.assign({}, state);
-            const artistsCopy: Artist[] = stateCopy.artists.splice(0);
+            const stateCopy: Artist[] = state.slice();
 
             if (artistIndex > -1) {
-                artistsCopy[artistIndex] = action.artistDetails;
+                stateCopy[artistIndex] = action.artistDetails;
             } else {
-                artistsCopy.push(action.artistDetails);
+                stateCopy.push(action.artistDetails);
             }
 
-            stateCopy.artists = artistsCopy;
             return stateCopy;
         default:
             return state;
     }
 }
 
-function Playlists (state: PlayerState = initialState, action: AnyAction): PlayerState {
+function Playlists (state: VisiblePlaylist[] = [], action: AnyAction): VisiblePlaylist[] {
     switch (action.type) {
         case FETCHED_TRACKLIST:
-            const playlistIndex: number = state.playlists.findIndex((playlist: VisiblePlaylist) =>
+            const playlistIndex: number = state.findIndex((playlist: VisiblePlaylist) =>
                 playlist.artistPermalink === action.artistPermalink);
 
-            const stateCopy: PlayerState = Object.assign({}, state);
-            const playlistsCopy: VisiblePlaylist[] = stateCopy.playlists.splice(0);
+            const stateCopy: VisiblePlaylist[] = state.slice();
             const playlist: VisiblePlaylist = {
                 artistPermalink: action.artistPermalink,
                 tracklist: action.tracklist,
@@ -56,12 +46,11 @@ function Playlists (state: PlayerState = initialState, action: AnyAction): Playe
             };
 
             if (playlistIndex > -1) {
-                playlistsCopy[playlistIndex] = playlist;
+                stateCopy[playlistIndex] = playlist;
             } else {
-                playlistsCopy.push(playlist);
+                stateCopy.push(playlist);
             }
 
-            stateCopy.playlists = playlistsCopy;
             return stateCopy;
         default:
             return state;
