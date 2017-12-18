@@ -12,8 +12,8 @@ function mapStateToProps (state: AppPlayerState, ownProps: {track: Track}): any 
 
 function mapDispatchToProps (dispatch: Dispatch<AppPlayerState>): any {
     return {
-        dispatchSelectTrack: (trackId: string): void => {
-            dispatch(selectTrack(trackId));
+        dispatchSelectTrack: (track: Track): void => {
+            dispatch(selectTrack(track));
         }
     }
 }

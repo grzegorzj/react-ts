@@ -6,20 +6,26 @@ export interface Track {
     user: Artist;
     id: string;
     title: string;
+    stream_url: string;
 }
 
 interface TrackProps {
     track: Track;
+    dispatchSelectTrack (track: Track): void;
 }
 
-export class TrackComponent extends React.Component<TrackProps> {
+export class TrackComponent extends React.Component<TrackProps | any> {
     constructor (props: TrackProps) {
         super(props);
     }
 
+    private selectTrack (): void {
+        this.props.dispatchSelectTrack(this.props.track);
+    }
+
     render () {
         return (
-            <b>{this.props.track.title}</b>
+            <b onClick={this.selectTrack.bind(this)}>{this.props.track.title}</b>
         );
     }
 }

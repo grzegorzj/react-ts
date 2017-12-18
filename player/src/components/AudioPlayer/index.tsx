@@ -11,14 +11,24 @@ export interface PlayerProps {
     state: PlaybackState;
 }
 
-export class AudioPlayer extends React.Component<PlayerProps | any> {
+export class AudioPlayer extends React.Component<PlayerProps | any> { // hack, just for accelerating of investigation
     constructor (props: PlayerProps) {
         super(props);
     }
 
+    private get audioPlayer (): JSX.Element {
+        return (
+            <audio autoPlay src={this.props.track.stream_url}>
+            </audio>
+        )
+    }
+
     render () {
         return (
-            <b>{this.props.track ? this.props.track.title : 'nothing being played yet'}</b>
+            <div>
+                <b>{this.props.track ? this.props.track.title : '-'}</b>
+                {this.props.track ? this.audioPlayer : ''}
+            </div>
         );
     }
 }

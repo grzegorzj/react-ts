@@ -1,10 +1,11 @@
 import { AnyAction } from 'redux';
+import { Track } from '../components/Playlist/Track';
 
 export const TRACK_SELECTED: string = 'TRACK_SELECTED';
-export function selectTrack (trackId: string): AnyAction {
+export function selectTrack (track: Track): AnyAction {
     return {
         type: TRACK_SELECTED,
-        trackId
+        track
     }
 }
 

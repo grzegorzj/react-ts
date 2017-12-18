@@ -80,7 +80,7 @@ function Player (state: PlayerState = initialPlayerState, action: AnyAction): Pl
                 track: action.track
             };
         default:
-            return initialPlayerState;
+            return state;
     }
 }
 
