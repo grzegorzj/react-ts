@@ -4,21 +4,22 @@ import { Artist } from '../../ArtistCatalogue/Artist';
 
 export interface Track {
     user: Artist;
+    id: string;
+    title: string;
 }
 
 interface TrackProps {
     track: Track;
 }
 
-export class Track extends React.Component<TrackProps> {
+export class TrackComponent extends React.Component<TrackProps> {
     constructor (props: TrackProps) {
         super(props);
     }
 
     render () {
         return (
-            <b>This is the list of artists</b>
+            <b>{this.props.track.title}</b>
         );
     }
 }
-

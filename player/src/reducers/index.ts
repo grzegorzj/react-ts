@@ -1,13 +1,28 @@
-import { AnyAction, combineReducers} from 'redux';
+import {AnyAction, combineReducers, Reducer} from 'redux';
 import { Artist } from '../components/ArtistCatalogue/Artist';
 import { VisiblePlaylist} from '../components/Playlist';
 import { FETCHED_ARTIST_DETAILS, FETCHED_TOP_ARTISTS } from '../actions/Artists';
 import { FETCHED_TRACKLIST } from '../actions/Playlist';
+import { Track } from '../components/Playlist/Track';
+import { TRACK_SELECTED} from "../actions/Track";
 
-export interface PlayerState {
+export interface AppPlayerState {
     Artists: Artist[];
     Playlists: VisiblePlaylist[];
+    Player: PlayerState;
 }
+
+export type PlaybackState = 'playing' | 'paused' | 'stopped';
+
+export interface PlayerState {
+    track: Track | undefined;
+    state: PlaybackState;
+}
+
+export const initialPlayerState: PlayerState = {
+    state: 'stopped',
+    track: undefined
+};
 
 
 function Artists (state: Artist[] = [], action: AnyAction): Artist[] {
@@ -57,4 +72,16 @@ function Playlists (state: VisiblePlaylist[] = [], action: AnyAction): VisiblePl
     }
 }
 
-export const playerApp = combineReducers({Artists, Playlists});
+function Player (state: PlayerState = initialPlayerState, action: AnyAction): PlayerState {
+    switch (action.type) {
+        case TRACK_SELECTED:
+            return {
+                state: 'playing',
+                track: action.track
+            };
+        default:
+            return initialPlayerState;
+    }
+}
+
+export const playerApp: Reducer<AppPlayerState> = combineReducers({Artists, Playlists, Player});

@@ -1,10 +1,24 @@
 import * as React from 'react';
 import './index.scss';
+import { PlaybackState } from '../../reducers';
+import { Track } from '../Playlist/Track';
 
-export class AudioPlayer extends React.Component<{}, object> {
+export interface PlayerProps {
+    dispatchPlayTrack(): void;
+    dispatchPauseTrack(): void;
+    dispatchStopTrack(): void;
+    track: Track;
+    state: PlaybackState;
+}
+
+export class AudioPlayer extends React.Component<PlayerProps | any> {
+    constructor (props: PlayerProps) {
+        super(props);
+    }
+
     render () {
         return (
-            <b>This is the audio player</b>
+            <b>{this.props.track ? this.props.track.title : 'nothing being played yet'}</b>
         );
     }
 }

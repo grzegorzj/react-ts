@@ -1,7 +1,7 @@
 import {connect, Dispatch} from 'react-redux';
 import { fetchTopArtists } from '../../actions/Artists';
 import { ArtistCatalogue } from '../../components/ArtistCatalogue';
-import { PlayerState } from '../../reducers';
+import { AppPlayerState } from '../../reducers';
 
 // `connect` method + types, ugh
 
@@ -11,7 +11,7 @@ function mapStateToProps (state: any): any {
     }
 }
 
-function mapDispatchToProps (dispatch: Dispatch<PlayerState>): any {
+function mapDispatchToProps (dispatch: Dispatch<AppPlayerState>): any {
     return {
         dispatchFetchArtists: (): void => {
             dispatch(fetchTopArtists(true));

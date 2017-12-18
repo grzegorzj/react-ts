@@ -1,5 +1,5 @@
 import { ThunkAction } from 'redux-thunk';
-import { PlayerState } from '../reducers';
+import { AppPlayerState } from '../reducers';
 import { Dispatch } from 'react-redux';
 import * as queryString from 'querystring';
 import { Artist } from '../components/ArtistCatalogue/Artist';
@@ -23,10 +23,10 @@ function fetchedArtistDetails (artistDetails: Artist): any {
 }
 
 
-export function fetchArtistDetails (permalink: string): ThunkAction<Promise<Artist | undefined>, PlayerState, null> {
+export function fetchArtistDetails (permalink: string): ThunkAction<Promise<Artist | undefined>, AppPlayerState, null> {
     const ENDPOINT_URL: string = 'https://api-v2.hearthis.at/';
 
-    return (dispatch: Dispatch<PlayerState>, getState: () => PlayerState): Promise<Artist | undefined> => {
+    return (dispatch: Dispatch<AppPlayerState>, getState: () => AppPlayerState): Promise<Artist | undefined> => {
         const artistFetched: boolean = !!getState().Artists.find((artist: Artist) => artist.permalink === permalink &&
         !!artist.track_count);
 
@@ -43,7 +43,7 @@ export function fetchArtistDetails (permalink: string): ThunkAction<Promise<Arti
     }
 }
 
-export function fetchTopArtists (fetchDetails: boolean = false): ThunkAction<Promise<Artist[]>, PlayerState, null> {
+export function fetchTopArtists (fetchDetails: boolean = false): ThunkAction<Promise<Artist[]>, AppPlayerState, null> {
     interface FetchTopArtistsFeedParams {
         type: string;
         count: number;
@@ -52,7 +52,7 @@ export function fetchTopArtists (fetchDetails: boolean = false): ThunkAction<Pro
     const ENDPOINT_URL: string = 'https://api-v2.hearthis.at/feed/';
     const TOP_ARTISTS_COUNT: number = 5;
 
-    return (dispatch: Dispatch<PlayerState>, getState: () => PlayerState): Promise<Artist[]> => {
+    return (dispatch: Dispatch<AppPlayerState>, getState: () => AppPlayerState): Promise<Artist[]> => {
         if (getState().Artists && getState().Artists.length === TOP_ARTISTS_COUNT) {
             return Promise.resolve([]);
         }
