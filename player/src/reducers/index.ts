@@ -4,7 +4,7 @@ import { VisiblePlaylist} from '../components/Playlist';
 import { FETCHED_ARTIST_DETAILS, FETCHED_TOP_ARTISTS } from '../actions/Artists';
 import { FETCHED_TRACKLIST } from '../actions/Playlist';
 import { Track } from '../components/Playlist/Track';
-import { TRACK_SELECTED} from "../actions/Track";
+import {TRACK_PAUSE, TRACK_PLAY, TRACK_SELECTED, TRACK_STOP} from "../actions/Track";
 
 export interface AppPlayerState {
     Artists: Artist[];
@@ -79,6 +79,25 @@ function Player (state: PlayerState = initialPlayerState, action: AnyAction): Pl
                 state: 'playing',
                 track: action.track
             };
+
+        case TRACK_PLAY:
+            return {
+                state: 'playing',
+                track: state.track
+            };
+
+        case TRACK_PAUSE:
+            return {
+                state: 'paused',
+                track: state.track
+            };
+
+        case TRACK_STOP:
+            return {
+                state: 'stopped',
+                track: state.track
+            };
+
         default:
             return state;
     }

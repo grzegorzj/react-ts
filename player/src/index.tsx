@@ -9,7 +9,6 @@ import { applyMiddleware, createStore, Store } from 'redux';
 import {playerApp, AppPlayerState, initialPlayerState} from './reducers';
 import { default as thunkMiddleware } from 'redux-thunk';
 
-
 const initialState: AppPlayerState = {
     Player: initialPlayerState,
     Artists: [],
