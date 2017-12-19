@@ -1,8 +1,14 @@
 .artist {
-  position: relative;
-  padding-left: 120px; }
+  position: relative; }
   .artist__avatar {
     border-radius: 50px;
     height: 50px;
     position: absolute;
-    left: 20px; }
+    left: 20px;
+    display: none; }
+    @media screen and (min-width: 768px) {
+      .artist__avatar {
+        display: inline-block; } }
+  @media screen and (min-width: 768px) {
+    .artist {
+      padding-left: 120px; } }

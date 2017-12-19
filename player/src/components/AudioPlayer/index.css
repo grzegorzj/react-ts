@@ -17,9 +17,8 @@
     opacity: 1;
     height: 70px; }
   .audio-player__track-title {
-    margin-right: 15px;
-    font-size: 1.2em;
-    max-width: 60%;
+    max-width: 45%;
+    font-size: 0.9em;
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -28,6 +27,11 @@
     left: 10px;
     position: relative;
     line-height: 98px; }
+    @media screen and (min-width: 768px) {
+      .audio-player__track-title {
+        max-width: 60%;
+        font-size: 1.2em;
+        margin-right: 15px; } }
   .audio-player__track-author {
     position: absolute;
     font-size: 0.7em;

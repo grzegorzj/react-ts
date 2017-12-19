@@ -54,7 +54,6 @@ export class Playlist extends React.Component<PlaylistProps> {
     private handleScroll (): void {
         const offset: number = 100;
         if (!this.fetching && window.scrollY + window.innerHeight >= document.body.clientHeight - offset) {
-            console.log('condition is true');
             this.fetching = true;
             this.props.dispatchFetchTracklist().then(() => {
                 this.fetching = false;

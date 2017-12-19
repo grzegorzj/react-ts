@@ -6,11 +6,21 @@ body {
 
 .track {
   margin: 0;
-  padding: 0.52em;
-  font-size: 1.3em;
+  padding: 0.4em;
+  font-size: 1em;
   border-bottom: solid 1px #000;
-  line-height: 2.6em;
+  line-height: 2em;
   letter-spacing: 0.1em;
   cursor: pointer; }
   .track:last-child {
     border-bottom: none; }
+  @media screen and (min-width: 768px) {
+    .track {
+      margin: 0;
+      padding: 0.52em;
+      font-size: 1.3em;
+      border-bottom: solid 1px #000;
+      line-height: 2.6em;
+      letter-spacing: 0.1em; }
+      .track:last-child {
+        border-bottom: none; } }
