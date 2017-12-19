@@ -1,0 +1,16 @@
+@import '../../index.scss';
+
+.playlist {
+  &__header {
+    @include header();
+  }
+
+  &__tracks-list {
+    @include list();
+  }
+
+  &__track {
+    @include list-element(1.3em);
+    cursor: pointer;
+  }
+}

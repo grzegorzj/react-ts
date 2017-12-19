@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 import App from './containers/App';
 import { BrowserRouter } from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
-import './index.scss';
+import './index.css';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore, Store } from 'redux';
 import {playerApp, AppPlayerState, initialPlayerState} from './reducers';

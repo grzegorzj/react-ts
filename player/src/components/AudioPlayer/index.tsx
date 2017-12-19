@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './index.scss';
+import './index.css';
 import { PlaybackState } from '../../reducers';
 import { Track } from '../Playlist/Track';
 
@@ -45,23 +45,16 @@ export class AudioPlayer extends React.Component<PlayerProps | any> { // hack, j
         )
     }
 
-    private get playPauseToggleButton (): JSX.Element {
-        return (
-            <div>
-                {!!this.props.track && this.props.state == 'playing' ? this.pauseButton : this.playButton}
-            </div>
-        )
-    }
 
     private get pauseButton (): JSX.Element {
         return(
-            <button className="audio-player__toggle--play" onClick={this.pause.bind(this)}>Pause</button>
+            <button className="audio-player__toggle audio-player__toggle--pause" onClick={this.pause.bind(this)}>Pause</button>
         )
     }
 
     private get playButton (): JSX.Element {
         return(
-            <button className="audio-player__toggle--play" onClick={this.play.bind(this)}>Play</button>
+            <button className="audio-player__toggle audio-player__toggle--play" onClick={this.play.bind(this)}>Play</button>
         )
     }
 
@@ -74,11 +67,11 @@ export class AudioPlayer extends React.Component<PlayerProps | any> { // hack, j
 
     render () {
         return (
-            <div>
-                <b>{this.props.track ? this.props.track.title : '-'}</b>
+            <div className={this.props.track ? "audio-player audio-player--show" : "audio-player"}>
+                <span className="audio-player__track-author">{this.props.track ? this.props.track.user.username : ''}</span><br/>
+                <span className="audio-player__track-title">{this.props.track ? this.props.track.title : '-'}</span>
                 {this.props.track ? this.audioPlayer : ''}
-                {this.props.track ? this.playPauseToggleButton : ''}
-                {this.props.track ? this.stopButton : ''}
+                {this.props.track ? this.stopButton : ''}{this.props.track ? (!!this.props.track && this.props.state == 'playing' ? this.pauseButton : this.playButton) : ''}
             </div>
         );
     }

@@ -12,23 +12,18 @@
   text-align: center;
   text-transform: uppercase;
   font-weight: bold;
-  line-height: 70px;
-  &--show {
+  line-height: 70px; }
+  .audio-player--show {
     opacity: 1;
-    height: 70px;
-  }
-
-  &__track-title {
+    height: 70px; }
+  .audio-player__track-title {
     margin-right: 15px;
-    font-size: 1.2em;
-  }
-  &__track-author{
+    font-size: 1.2em; }
+  .audio-player__track-author {
     position: absolute;
     font-size: 0.7em;
-    line-height: 37px;
-  }
-  
-  button {
+    line-height: 37px; }
+  .audio-player button {
     display: inline;
     background-color: #fff;
     border: solid 3px #000;
@@ -39,11 +34,7 @@
     font-weight: bold;
     padding: 10px;
     margin: 10px;
-    cursor: pointer;
-  }
-
-  .audio-player__toggle {
+    cursor: pointer; }
+  .audio-player .audio-player__toggle {
     background-color: #000;
-    color: #fff;
-  }
-}
+    color: #fff; }

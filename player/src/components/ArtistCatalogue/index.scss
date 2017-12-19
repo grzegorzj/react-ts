@@ -1,0 +1,20 @@
+@import '../../index.scss';
+
+.artist-catalogue {
+  &__header {
+    @include header();
+  }
+
+  &__artists-list {
+    @include list();
+  }
+
+  &__artist {
+    @include list-element(1.3em);
+    cursor: pointer;
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+  }
+}

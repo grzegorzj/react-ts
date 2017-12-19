@@ -18,6 +18,15 @@ function fetchedTracklist (tracklist: Track[], artistPermalink: string, tracksMa
     };
 }
 
+export const WILL_FETCH_TRACKLIST: string = 'WILL_FETCH_TRACKLIST';
+function willFetchTracklist (artistPermalink: string, size: number): AnyAction {
+    return {
+        type: WILL_FETCH_TRACKLIST,
+        artistPermalink,
+        size,
+    }
+}
+
 // always get next 20
 /*
 Not sure if I missed something, but it seems like foreign key between artists and playlists is the `permalink`.
@@ -33,13 +42,13 @@ export function fetchArtistTracklist (
     const ENDPOINT_URL: string = 'https://api-v2.hearthis.at';
     const PAGE_SIZE: number = 20;
 
-    return (dispatch: Dispatch<AppPlayerState>, getState: () => AppPlayerState): Promise<Track[] | undefined> => {
+    return (dispatch: Dispatch<AppPlayerState>, getState: () => AppPlayerState): Promise<Track[]> => {
         const playlistInState: VisiblePlaylist | undefined = getState().Playlists.find(
             (playlist: VisiblePlaylist): boolean => {
            return playlist.artistPermalink === artistPermalink;
         });
 
-        const fetchedTracks: number = playlistInState ? playlistInState.tracklist.length : 0;
+        const fetchedTracks: number = playlistInState ? playlistInState.fetchedTracks : 0;
 
         const params: FetchArtistTracklistParams = {
             type: 'tracks',
@@ -57,8 +66,14 @@ export function fetchArtistTracklist (
             tracksMaxCount = +artist.track_count;
         } else {
             dispatch(fetchArtistThenTracklist(artistPermalink));
-            return Promise.resolve(undefined);
+            return Promise.resolve([]);
         }
+
+        if (tracksMaxCount && tracksMaxCount <= fetchedTracks) {
+            return Promise.resolve([]);
+        }
+
+        dispatch(willFetchTracklist(artistPermalink, PAGE_SIZE));
 
         return fetch(`${ENDPOINT_URL}/${artistPermalink}/?${queryString.stringify(params)}`)
             .then((response: any) => response.json())

@@ -2,7 +2,7 @@ import {AnyAction, combineReducers, Reducer} from 'redux';
 import { Artist } from '../components/ArtistCatalogue/Artist';
 import { VisiblePlaylist} from '../components/Playlist';
 import { FETCHED_ARTIST_DETAILS, FETCHED_TOP_ARTISTS } from '../actions/Artists';
-import { FETCHED_TRACKLIST } from '../actions/Playlist';
+import {FETCHED_TRACKLIST, WILL_FETCH_TRACKLIST} from '../actions/Playlist';
 import { Track } from '../components/Playlist/Track';
 import {TRACK_PAUSE, TRACK_PLAY, TRACK_SELECTED, TRACK_STOP} from "../actions/Track";
 
@@ -48,16 +48,25 @@ function Artists (state: Artist[] = [], action: AnyAction): Artist[] {
 }
 
 function Playlists (state: VisiblePlaylist[] = [], action: AnyAction): VisiblePlaylist[] {
+    const playlistIndex: number = state.findIndex((playlist: VisiblePlaylist) =>
+        playlist.artistPermalink === action.artistPermalink);
+
+    const stateCopy: VisiblePlaylist[] = state.slice();
+
     switch (action.type) {
         case FETCHED_TRACKLIST:
-            const playlistIndex: number = state.findIndex((playlist: VisiblePlaylist) =>
-                playlist.artistPermalink === action.artistPermalink);
-
-            const stateCopy: VisiblePlaylist[] = state.slice();
+            if (!action.tracklist) {
+                return state;
+            }
             const playlist: VisiblePlaylist = {
                 artistPermalink: action.artistPermalink,
-                tracklist: action.tracklist,
-                tracksMaxCount: action.tracksMaxCount
+                tracklist: playlistIndex > -1 ?
+                    state[playlistIndex].tracklist.concat(action.tracklist) :
+                    action.tracklist,
+                tracksMaxCount: action.tracksMaxCount,
+                fetchedTracks: playlistIndex > -1 ?
+                    state[playlistIndex].fetchedTracks :
+                    action.tracklist.length,
             };
 
             if (playlistIndex > -1) {
@@ -66,6 +75,11 @@ function Playlists (state: VisiblePlaylist[] = [], action: AnyAction): VisiblePl
                 stateCopy.push(playlist);
             }
 
+            return stateCopy;
+        case WILL_FETCH_TRACKLIST:
+            if (playlistIndex > -1) {
+                stateCopy[playlistIndex].fetchedTracks += action.size;
+             }
             return stateCopy;
         default:
             return state;

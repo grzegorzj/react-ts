@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './index.scss';
+import './index.css';
 import { Link } from 'react-router-dom';
 
 export interface Artist {
@@ -35,7 +35,7 @@ export class Artist extends React.Component<ArtistProps> {
                 </Link>
                 {
                     this.props.artist.track_count ?
-                        <span className="artist__track-count">{this.props.artist.track_count} tracks</span> :
+                        <span className="artist__track-count">, {this.props.artist.track_count} tracks</span> :
                         null
                 }
             </div>

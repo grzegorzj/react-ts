@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,900");
+body {
+  margin: 0;
+  padding: 3em;
+  font-family: Lato; }
+
+.playlist__header {
+  font-size: 2em;
+  font-weight: 900;
+  margin-top: 0;
+  margin-bottom: 1em;
+  text-transform: uppercase;
+  letter-spacing: 0.3em; }
+
+.playlist__tracks-list {
+  list-style-type: none;
+  padding: 0; }
+
+.playlist__track {
+  margin: 0;
+  padding: 0.52em;
+  font-size: 1.3em;
+  border-bottom: solid 1px #000;
+  line-height: 2.6em;
+  letter-spacing: 0.1em;
+  cursor: pointer; }
+  .playlist__track:last-child {
+    border-bottom: none; }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './index.scss';
+import './index.css';
 import { Artist } from './Artist';
 
 export interface ArtistCatalogueProps {
@@ -27,10 +27,10 @@ export class ArtistCatalogue extends React.Component<ArtistCatalogueProps> {
 
     private get artistsList (): JSX.Element {
         return (
-                <ul className="artist-catalogue__artist-list">
+                <ul className="artist-catalogue__artists-list">
                 {
                     this.props.artists.map((artist: Artist, i: number): JSX.Element => (
-                        <li key={i} className="artist-catalogue__artist-list">
+                        <li key={i} className="artist-catalogue__artist">
                             <Artist artist={artist} />
                         </li>
                     ))
