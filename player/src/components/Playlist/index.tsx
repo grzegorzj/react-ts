@@ -45,26 +45,20 @@ export class Playlist extends React.Component<PlaylistProps> {
                 <Link to="/" className="playlist__back">back</Link>
                 <h1 className="playlist__header">{this.props.artist ? this.props.artist.username : ''}</h1>
                 {this.trackList}
+                {this.fetching ? <div className="playlist__loading">Loading more tracks...</div> : ''}
             </div>
         );
     }
 
+
     private handleScroll (): void {
         const offset: number = 100;
-        if (!this.fetching && window.scrollY >= window.outerHeight - offset || this.height < window.outerHeight) {
+        if (!this.fetching && window.scrollY + window.innerHeight >= document.body.clientHeight - offset) {
+            console.log('condition is true');
             this.fetching = true;
             this.props.dispatchFetchTracklist().then(() => {
                 this.fetching = false;
             });
-        }
-    }
-
-    private get height (): number {
-        const elem: Element = document.getElementsByClassName('playlist')[0];
-        if (elem) {
-            return elem.clientHeight;
-        } else {
-            return 0;
         }
     }
 

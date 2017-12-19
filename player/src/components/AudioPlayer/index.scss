@@ -21,11 +21,26 @@
   &__track-title {
     margin-right: 15px;
     font-size: 1.2em;
+    max-width: 60%;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    float: left;
+    left: 10px;
+    position: relative;
+    line-height: 98px;
   }
+
   &__track-author{
     position: absolute;
     font-size: 0.7em;
     line-height: 37px;
+    left: 10px;
+  }
+
+  &__controls {
+    float: right;
   }
   
   button {

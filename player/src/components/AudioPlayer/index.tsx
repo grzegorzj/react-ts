@@ -68,10 +68,12 @@ export class AudioPlayer extends React.Component<PlayerProps | any> { // hack, j
     render () {
         return (
             <div className={this.props.track ? "audio-player audio-player--show" : "audio-player"}>
-                <span className="audio-player__track-author">{this.props.track ? this.props.track.user.username : ''}</span><br/>
-                <span className="audio-player__track-title">{this.props.track ? this.props.track.title : '-'}</span>
-                {this.props.track ? this.audioPlayer : ''}
-                {this.props.track ? this.stopButton : ''}{this.props.track ? (!!this.props.track && this.props.state == 'playing' ? this.pauseButton : this.playButton) : ''}
+                <span className="audio-player__track-author">{this.props.track ? this.props.track.user.username : ''}</span>
+                <div className="audio-player__track-title">{this.props.track ? this.props.track.title : '-'}</div>
+                <div className="audio-player__controls">
+                    {this.props.track ? this.audioPlayer : ''}
+                    {this.props.track ? this.stopButton : ''}{this.props.track ? (!!this.props.track && this.props.state == 'playing' ? this.pauseButton : this.playButton) : ''}
+                </div>
             </div>
         );
     }
