@@ -1,14 +1,13 @@
-import {connect, Dispatch} from 'react-redux';
+import { connect, Dispatch } from 'react-redux';
 import { AppPlayerState } from '../../reducers';
 import { pauseTrack, playTrack, stopTrack } from '../../actions/Track';
 import { AudioPlayer } from '../../components/AudioPlayer';
-
 
 function mapStateToProps (state: AppPlayerState): any {
     return {
         track: state.Player.track,
         state: state.Player.state,
-    }
+    };
 }
 
 function mapDispatchToProps (dispatch: Dispatch<AppPlayerState>): any {
@@ -22,7 +21,7 @@ function mapDispatchToProps (dispatch: Dispatch<AppPlayerState>): any {
         dispatchStopTrack: (): void => {
             dispatch(stopTrack());
         },
-    }
+    };
 }
 
 export default connect(

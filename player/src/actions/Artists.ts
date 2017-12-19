@@ -11,7 +11,7 @@ function fetchedTopArtists (topArtists: Artist[]): any {
     return {
         type: FETCHED_TOP_ARTISTS,
         topArtists
-    }
+    };
 }
 
 export const FETCHED_ARTIST_DETAILS: string = 'FETCHED_ARTIST_DETAILS';
@@ -19,9 +19,8 @@ function fetchedArtistDetails (artistDetails: Artist): any {
     return {
         type: FETCHED_ARTIST_DETAILS,
         artistDetails
-    }
+    };
 }
-
 
 export function fetchArtistDetails (permalink: string): ThunkAction<Promise<Artist | undefined>, AppPlayerState, null> {
     const ENDPOINT_URL: string = 'https://api-v2.hearthis.at/';
@@ -31,7 +30,7 @@ export function fetchArtistDetails (permalink: string): ThunkAction<Promise<Arti
         !!artist.track_count);
 
         if (artistFetched) {
-            return <Promise<undefined>>Promise.resolve(undefined);
+            return <Promise<undefined>> Promise.resolve(undefined);
         }
 
         return fetch(`${ENDPOINT_URL}${permalink}/`)
@@ -40,7 +39,7 @@ export function fetchArtistDetails (permalink: string): ThunkAction<Promise<Arti
                 dispatch(fetchedArtistDetails(artistDetails));
                 return artistDetails;
             });
-    }
+    };
 }
 
 export function fetchTopArtists (fetchDetails: boolean = false): ThunkAction<Promise<Artist[]>, AppPlayerState, null> {
@@ -73,10 +72,10 @@ export function fetchTopArtists (fetchDetails: boolean = false): ThunkAction<Pro
                 return topArtists;
             }).then((topArtists: Artist[]) => {
                 if (fetchDetails) {
-                    topArtists.forEach((artist: Artist) => dispatch(fetchArtistDetails(artist.permalink)))
+                    topArtists.forEach((artist: Artist) => dispatch(fetchArtistDetails(artist.permalink)));
                 }
 
                 return topArtists;
             });
-    }
+    };
 }

@@ -21,7 +21,6 @@ export class Artist extends React.Component<ArtistProps> {
         super(props);
     }
 
-
     render (): JSX.Element {
         return (
             <Link to={`/playlist/${this.props.artist.permalink}`}>

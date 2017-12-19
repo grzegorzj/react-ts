@@ -24,7 +24,7 @@ function willFetchTracklist (artistPermalink: string, size: number): AnyAction {
         type: WILL_FETCH_TRACKLIST,
         artistPermalink,
         size,
-    }
+    };
 }
 
 // always get next 20

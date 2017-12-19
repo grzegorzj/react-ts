@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './index.css';
+import './index.scss';
 import { Artist } from '../../ArtistCatalogue/Artist';
 
 export interface Track {
@@ -10,8 +10,8 @@ export interface Track {
 }
 
 interface TrackProps {
-    track: Track;
     dispatchSelectTrack (track: Track): void;
+    track: Track;
 }
 
 export class TrackComponent extends React.Component<TrackProps | any> {
@@ -19,15 +19,15 @@ export class TrackComponent extends React.Component<TrackProps | any> {
         super(props);
     }
 
-    private selectTrack (): void {
-        this.props.dispatchSelectTrack(this.props.track);
-    }
-
-    render () {
+    public render () {
         return (
             <li className="track">
                 <strong onClick={this.selectTrack.bind(this)}>{this.props.track.title}</strong>
             </li>
         );
+    }
+
+    private selectTrack (): void {
+        this.props.dispatchSelectTrack(this.props.track);
     }
 }

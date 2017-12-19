@@ -1,7 +1,7 @@
 import { connect, Dispatch } from 'react-redux';
 import { fetchArtistDetails } from '../../actions/Artists';
 import { AppPlayerState } from '../../reducers';
-import {Artist} from '../../components/ArtistCatalogue/Artist';
+import { Artist } from '../../components/ArtistCatalogue/Artist';
 import { Playlist, VisiblePlaylist } from '../../components/Playlist';
 import { fetchArtistTracklist } from '../../actions/Playlist';
 import { Track } from '../../components/Playlist/Track';
@@ -21,7 +21,7 @@ function mapStateToProps (state: any, ownProps: any): any {
             .Artists
             .find((existingArtist: Artist) => existingArtist.permalink === ownProps.match.params.permalink),
         tracks: tracks,
-    }
+    };
 }
 
 function mapDispatchToProps (dispatch: Dispatch<AppPlayerState>, ownProps: any): any {
@@ -32,7 +32,7 @@ function mapDispatchToProps (dispatch: Dispatch<AppPlayerState>, ownProps: any):
         dispatchFetchTracklist: (): Promise<Track[] | undefined> => {
             return dispatch(fetchArtistTracklist(ownProps.match.params.permalink));
         }
-    }
+    };
 }
 
 export default connect(

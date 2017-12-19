@@ -1,10 +1,9 @@
 import * as React from 'react';
 import './index.css';
-import { Artist } from '../ArtistCatalogue/Artist'
+import { Artist } from '../ArtistCatalogue/Artist';
 import { default as PlayableTrack } from '../../containers/PlayableTrack';
-import {Track, TrackComponent} from './Track';
-import {Link} from "react-router-dom";
-
+import { Track, TrackComponent } from './Track';
+import { Link } from 'react-router-dom';
 
 export interface VisiblePlaylist {
     artistPermalink: string;
@@ -14,18 +13,18 @@ export interface VisiblePlaylist {
 }
 
 interface PlaylistProps {
-    dispatchFetchArtist(): Promise<Artist>;
-    dispatchFetchTracklist(): Promise<Track[]>;
     artist: Artist;
     tracks: Track[];
+    dispatchFetchArtist(): Promise<Artist>;
+    dispatchFetchTracklist(): Promise<Track[]>;
 }
 
 export class Playlist extends React.Component<PlaylistProps> {
+    private fetching: boolean = false;
+
     constructor (props: PlaylistProps) {
         super(props);
     }
-
-    private fetching: boolean = false;
 
     public componentDidMount (): void {
         this.props.dispatchFetchArtist().then(() => {
@@ -49,7 +48,6 @@ export class Playlist extends React.Component<PlaylistProps> {
             </div>
         );
     }
-
 
     private handleScroll (): void {
         const offset: number = 100;
