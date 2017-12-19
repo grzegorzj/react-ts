@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './index.scss';
+import './index.css';
 import { Artist } from '../../ArtistCatalogue/Artist';
 
 export interface Track {
