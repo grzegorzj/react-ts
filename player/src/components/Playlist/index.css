@@ -26,3 +26,11 @@ body {
   cursor: pointer; }
   .playlist__track:last-child {
     border-bottom: none; }
+
+.playlist__back {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  font-weight: bold;
+  font-size: 1em;
+  letter-spacing: 0.2em; }

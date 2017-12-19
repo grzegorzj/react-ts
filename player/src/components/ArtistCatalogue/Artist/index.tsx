@@ -24,21 +24,21 @@ export class Artist extends React.Component<ArtistProps> {
 
     render (): JSX.Element {
         return (
-            <div className="artist">
-                {
-                    this.props.artist.thumb_url ?
-                        <img className="artist__avatar" src={this.props.artist.thumb_url} /> :
-                        null
-                }
-                <Link to={`/playlist/${this.props.artist.permalink}`}>
-                    <b>{this.props.artist.username}</b>
-                </Link>
-                {
-                    this.props.artist.track_count ?
-                        <span className="artist__track-count">, {this.props.artist.track_count} tracks</span> :
-                        null
-                }
-            </div>
+            <Link to={`/playlist/${this.props.artist.permalink}`}>
+                <div className="artist">
+                    {
+                        this.props.artist.thumb_url ?
+                            <img className="artist__avatar" src={this.props.artist.thumb_url} /> :
+                            null
+                    }
+                    <strong>{this.props.artist.username}</strong>
+                    {
+                        this.props.artist.track_count ?
+                            <span className="artist__track-count">, {this.props.artist.track_count} tracks</span> :
+                            null
+                    }
+                </div>
+            </Link>
         );
     }
 }

@@ -3,6 +3,7 @@ import './index.css';
 import { Artist } from '../ArtistCatalogue/Artist'
 import { default as PlayableTrack } from '../../containers/PlayableTrack';
 import {Track, TrackComponent} from './Track';
+import {Link} from "react-router-dom";
 
 
 export interface VisiblePlaylist {
@@ -41,6 +42,7 @@ export class Playlist extends React.Component<PlaylistProps> {
     public render (): JSX.Element {
         return (
             <div className="playlist">
+                <Link to="/" className="playlist__back">back</Link>
                 <h1 className="playlist__header">{this.props.artist ? this.props.artist.username : ''}</h1>
                 {this.trackList}
             </div>
@@ -71,9 +73,7 @@ export class Playlist extends React.Component<PlaylistProps> {
             <ul className="playlist__tracks-list">
                 {
                     this.props.tracks.map((track: Track, i: number): JSX.Element => (
-                        <li key={i} className="playlist__track">
-                            <PlayableTrack track={track} />
-                        </li>
+                        <PlayableTrack key={i} track={track} />
                     ))
                 }
             </ul>

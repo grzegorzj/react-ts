@@ -13,4 +13,13 @@
     @include list-element(1.3em);
     cursor: pointer;
   }
+
+  &__back {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #000;
+    font-weight: bold;
+    font-size: 1em;
+    letter-spacing: 0.2em;
+  }
 }

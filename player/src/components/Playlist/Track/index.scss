@@ -1,0 +1,6 @@
+@import '../../../index.scss';
+
+.track {
+  @include list-element(1.3em);
+  cursor: pointer;
+}

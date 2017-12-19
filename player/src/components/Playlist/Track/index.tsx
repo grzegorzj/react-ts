@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './index.scss';
+import './index.css';
 import { Artist } from '../../ArtistCatalogue/Artist';
 
 export interface Track {
@@ -25,7 +25,9 @@ export class TrackComponent extends React.Component<TrackProps | any> {
 
     render () {
         return (
-            <b onClick={this.selectTrack.bind(this)}>{this.props.track.title}</b>
+            <li className="track">
+                <strong onClick={this.selectTrack.bind(this)}>{this.props.track.title}</strong>
+            </li>
         );
     }
 }
