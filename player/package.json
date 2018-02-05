@@ -4,14 +4,17 @@
   "private": true,
   "dependencies": {
     "lodash": "^4.17.4",
-    "mobx-react": "^4.3.5",
     "node-sass-chokidar": "0.0.3",
     "query-string": "^5.0.1",
     "react": "^16.2.0",
+    "react-audio-player": "^0.6.4",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts-ts": "2.8.0"
+    "react-scripts-ts": "2.8.0",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -27,8 +30,8 @@
     "@types/node": "^8.0.57",
     "@types/react": "^16.0.28",
     "@types/react-dom": "^16.0.3",
+    "@types/react-redux": "^5.0.14",
     "@types/react-router-dom": "^4.2.3",
-    "install-peers": "^1.0.2",
-    "mobx-react": "^4.3.5"
+    "install-peers": "^1.0.2"
   }
 }
